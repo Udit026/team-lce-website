@@ -1,0 +1,2 @@
+export const inputCls = 'w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-[14px] text-white outline-none focus:border-accent'
+export const btnCls = 'rounded-full border border-accent px-4 py-2 text-[11px] font-semibold tracking-[.15em] text-accent hover:bg-accent/10 disabled:opacity-40'

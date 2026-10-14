@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg font-sans font-light leading-normal text-fg antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid theme('colors.accent2'); outline-offset: 3px; }
+  ::selection { background: theme('colors.accent'); color: #000; }
+}
+
+/* ---------- things that are easier in plain CSS (masks, svg noise, range slider) ---------- */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
+  background-size: 26px 26px;
+  --m: radial-gradient(ellipse at 70% 45%, #000 0%, transparent 65%);
+  -webkit-mask: var(--m);
+  mask: var(--m);
+}
+.dots-center { --m: radial-gradient(ellipse at 50% 50%, #000 0%, transparent 60%); }
+.dots-profile { --m: radial-gradient(ellipse at 75% 40%, #000 0%, transparent 60%); }
+
+/* outline (hollow) text */
+.stroke-text { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55); }
+
+/* range slider (ad spend) */
+input[type='range'] {
+  flex: 1; -webkit-appearance: none; appearance: none; height: 26px; background: transparent; cursor: pointer;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 3px; border-radius: 3px;
+  background: linear-gradient(90deg, theme('colors.accent') var(--f, 0%), rgba(255, 255, 255, 0.14) var(--f, 0%));
+}
+input[type='range']::-moz-range-track { height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.14); }
+input[type='range']::-moz-range-progress { height: 3px; border-radius: 3px; background: theme('colors.accent'); }
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; margin-top: -7.5px;
+  box-shadow: 0 0 0 4px rgba(253, 130, 7, 0.28);
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px; height: 18px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(253, 130, 7, 0.28);
+}
+
+.thin-scroll { scrollbar-width: thin; scrollbar-color: theme('colors.dim') transparent; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .rise-b { transform: none !important; }
+  .fade-in { opacity: 1 !important; }
+}

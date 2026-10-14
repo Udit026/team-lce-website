@@ -1,0 +1,7 @@
+team-lce-git-backup/
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/dist/
+**/build/
