@@ -76,8 +76,11 @@ export async function api(
   const token = getToken()
 
   // URL ke end ke extra slashes remove karke /api add karo
+
+  // ye git hub mai uploade hua hhai 
   const baseURL = API_URL.replace(/\/+$/, '')
   const endpoint = `${baseURL}/api${path.startsWith('/') ? path : `/${path}`}`
+  
 
   let response
 
